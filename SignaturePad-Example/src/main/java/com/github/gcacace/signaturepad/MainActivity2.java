@@ -27,7 +27,7 @@ import java.io.OutputStreamWriter;
 
 import it.gcacace.signaturepad.R;
 
-public class Main2Activity extends Activity {
+public class MainActivity2 extends Activity {
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -45,7 +45,7 @@ public class Main2Activity extends Activity {
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                Toast.makeText(Main2Activity.this, "OnStartSigning", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity2.this, "OnStartSigning", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -76,14 +76,14 @@ public class Main2Activity extends Activity {
             public void onClick(View view) {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(Main2Activity.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Main2Activity.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
                 }
                 if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
-                    Toast.makeText(Main2Activity.this, "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Main2Activity.this, "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -97,7 +97,7 @@ public class Main2Activity extends Activity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length <= 0
                         || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(Main2Activity.this, "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -140,7 +140,7 @@ public class Main2Activity extends Activity {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(photo);
         mediaScanIntent.setData(contentUri);
-        Main2Activity.this.sendBroadcast(mediaScanIntent);
+        MainActivity2.this.sendBroadcast(mediaScanIntent);
     }
 
     public boolean addSvgSignatureToGallery(String signatureSvg) {
