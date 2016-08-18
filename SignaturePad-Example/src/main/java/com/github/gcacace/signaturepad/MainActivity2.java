@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
@@ -40,7 +41,10 @@ public class MainActivity2 extends Activity {
         super.onCreate(savedInstanceState);
         verifyStoragePermissions(this);
         setContentView(R.layout.activity_main);
-
+       // Bundle extras=getIntent().getExtras();
+       // String tono=extras.getString("TN");
+       //TextView tv = (TextView) findViewById(R.id.signature_pad_description);
+        //tv.setText("工作單："+tono+"，已完成作業，我同意簽名確認");
         mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
