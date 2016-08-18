@@ -28,10 +28,10 @@
                 android:layout_width="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="#900303"
                 android:layout_marginBottom="16dp"
                 android:layout_alignParentBottom="true"
-                android:text="@string/agreement" />
+                android:text="本次作業已完成，我同意簽名" />
 
         <com.github.gcacace.signaturepad.views.SignaturePad
                 android:layout_width="fill_parent"
@@ -52,16 +52,18 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/clear_pad"
-                android:enabled="false" />
+                android:text="清除重簽"
+                android:enabled="false"
+            android:textColor="#050757" />
 
         <Button
                 android:id="@+id/save_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/save_signature"
-                android:enabled="false" />
+                android:text="輸入確認"
+                android:enabled="false"
+            android:textColor="#050757" />
     </LinearLayout>
 
 </RelativeLayout>
