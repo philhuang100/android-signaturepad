@@ -35,16 +35,19 @@ public class MainActivity2 extends Activity {
     private SignaturePad mSignaturePad;
     private Button mClearButton;
     private Button mSaveButton;
+    String tono="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         verifyStoragePermissions(this);
         setContentView(R.layout.activity_main);
-       // Bundle extras=getIntent().getExtras();
+        Intent it=getIntent();
+        tono=it.getStringExtra("TN");
+        //Bundle extras=getIntent().getExtras();
        // String tono=extras.getString("TN");
-       //TextView tv = (TextView) findViewById(R.id.signature_pad_description);
-        //tv.setText("工作單："+tono+"，已完成作業，我同意簽名確認");
+       TextView tv = (TextView) findViewById(R.id.signature_pad_description);
+        tv.setText("工作單："+tono+" 已完成作業，我同意簽名確認");
         mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
@@ -91,6 +94,14 @@ public class MainActivity2 extends Activity {
                 }
             }
         });
+        //===================================
+        //Intent intent = new Intent("ReplyActivity.intent.action.Launch");
+        //Bundle extras=new Bundle();
+        //extras.putString("TN",tono);
+        //intent.putExtra("TN",tono);
+       // startActivity(intent);
+        //======================================
+
     }
 
     @Override
@@ -130,7 +141,14 @@ public class MainActivity2 extends Activity {
     public boolean addJpgSignatureToGallery(Bitmap signature) {
         boolean result = false;
         try {
-            File photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
+            //File photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
+            //File photo = new File(getAlbumStorageDir("SignaturePad"), String.format(tono+".jpg", System.currentTimeMillis()));
+            //==================
+            File SDCardpath = Environment.getExternalStorageDirectory();
+            File DataPath = new File( SDCardpath.getParent() + "/" + SDCardpath.getName() + "/irs" );
+            if (!DataPath.exists()) DataPath.mkdirs();
+            File photo = new File(SDCardpath.getParent() + "/" + SDCardpath.getName() + "/irs", String.format(tono+".jpg", System.currentTimeMillis()));
+            //=======================
             saveBitmapToJPG(signature, photo);
             scanMediaFile(photo);
             result = true;
@@ -150,7 +168,14 @@ public class MainActivity2 extends Activity {
     public boolean addSvgSignatureToGallery(String signatureSvg) {
         boolean result = false;
         try {
-            File svgFile = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.svg", System.currentTimeMillis()));
+            //File svgFile = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.svg", System.currentTimeMillis()));
+            //File svgFile = new File(getAlbumStorageDir("SignaturePad"), String.format(tono+".svg", System.currentTimeMillis()));
+            //==================
+            File SDCardpath = Environment.getExternalStorageDirectory();
+            File DataPath = new File( SDCardpath.getParent() + "/" + SDCardpath.getName() + "/irs" );
+            if (!DataPath.exists()) DataPath.mkdirs();
+            File svgFile = new File(SDCardpath.getParent() + "/" + SDCardpath.getName() + "/irs", String.format(tono+".svg", System.currentTimeMillis()));
+            //=======================
             OutputStream stream = new FileOutputStream(svgFile);
             OutputStreamWriter writer = new OutputStreamWriter(stream);
             writer.write(signatureSvg);
