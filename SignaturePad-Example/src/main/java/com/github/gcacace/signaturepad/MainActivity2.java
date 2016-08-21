@@ -52,7 +52,7 @@ public class MainActivity2 extends Activity {
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                Toast.makeText(MainActivity2.this, "OnStartSigning", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity2.this, "簽名中...", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -83,15 +83,18 @@ public class MainActivity2 extends Activity {
             public void onClick(View view) {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(MainActivity2.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity2.this, "JPG已存檔", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity2.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "無法儲存JPG", Toast.LENGTH_SHORT).show();
                 }
                 if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
-                    Toast.makeText(MainActivity2.this, "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity2.this, "SVG以存檔", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity2.this, "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "無法儲存SVG", Toast.LENGTH_SHORT).show();
                 }
+                Intent intent = new Intent("ReplyActivity.intent.action.Launch");
+                startActivity(intent);
+                MainActivity2.this.finish();
             }
         });
         //===================================
@@ -112,7 +115,7 @@ public class MainActivity2 extends Activity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length <= 0
                         || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(MainActivity2.this, "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "無法儲存簽名檔", Toast.LENGTH_SHORT).show();
                 }
             }
         }
